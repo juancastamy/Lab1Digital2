@@ -1,8 +1,9 @@
 /*
  * File:   lab_1.c
- * Author: juan
+ * Author: Juan Castillo
+ * Student ID: 17074
  *
- * Created on 24 de enero de 2020, 01:29 PM
+ * Created on Jan. 24, 2020
  */
 
 
