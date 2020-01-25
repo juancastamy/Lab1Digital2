@@ -2516,6 +2516,10 @@ extern __bank0 __bit __timeout;
 
 
 
+
+
+
+char Estado = 0;
 char carrera1 = 1;
 char carrera2 = 1;
 char i = 3;
@@ -2531,48 +2535,50 @@ void main(void) {
     TRISDbits.TRISD4 = 0;
 
 
-    TRISEbits.TRISE3 = 1;
+    PORTEbits.RE3 = 1;
 
 
     ANSELH = 0;
     ANSEL = 0;
-
-
-
-
-
     PORTC = SEGMENTOS[0];
-    if (PORTEbits.RE3 ==1){
-        PORTC = SEGMENTOS[i];
-        PORTDbits.RD2 = 1;
-        PORTDbits.RD3 = 0;
-        PORTDbits.RD4 = 0;
-        _delay((unsigned long)((5)*(4000000/4000.0)));
-        i = i-1;
+    while(1){
+        if (PORTEbits.RE3 == 1){
+            Estado = 1;
+        }
+        if (PORTEbits.RE3 == 0 && Estado == 1){
+            PORTC = SEGMENTOS[i];
+            PORTDbits.RD2 = 1;
+            PORTDbits.RD3 = 0;
+            PORTDbits.RD4 = 0;
+            _delay((unsigned long)((5)*(4000000/4000.0)));
+            i = i-1;
 
-        PORTC = SEGMENTOS[i];
-        PORTDbits.RD2 = 0;
-        PORTDbits.RD3 = 1;
-        PORTDbits.RD4 = 0;
-        _delay((unsigned long)((5)*(4000000/4000.0)));
-        i = i-1;
-        PORTC = SEGMENTOS[i];
-        PORTDbits.RD2 = 0;
-        PORTDbits.RD3 = 0;
-        PORTDbits.RD4 = 1;
-        _delay((unsigned long)((5)*(4000000/4000.0)));
-        i = i-1;
-        PORTC = SEGMENTOS[i];
-        PORTDbits.RD2 = 1;
-        PORTDbits.RD3 = 1;
-        PORTDbits.RD4 = 1;
-        _delay((unsigned long)((5)*(4000000/4000.0)));
+            PORTC = SEGMENTOS[i];
+            PORTDbits.RD2 = 0;
+            PORTDbits.RD3 = 1;
+            PORTDbits.RD4 = 0;
+            _delay((unsigned long)((5)*(4000000/4000.0)));
+            i = i-1;
+            PORTC = SEGMENTOS[i];
+            PORTDbits.RD2 = 0;
+            PORTDbits.RD3 = 0;
+            PORTDbits.RD4 = 1;
+            _delay((unsigned long)((5)*(4000000/4000.0)));
+            i = i-1;
+            PORTC = SEGMENTOS[i];
+            PORTDbits.RD2 = 1;
+            PORTDbits.RD3 = 1;
+            PORTDbits.RD4 = 1;
+            Estado = 0;
+            _delay((unsigned long)((5)*(4000000/4000.0)));
+        }
+        else {
+            PORTDbits.RD2 = 0;
+            PORTDbits.RD3 = 0;
+            PORTDbits.RD4 = 0;
+            i = 3;
+        }
     }
-    else {
-        PORTDbits.RD2 = 0;
-        PORTDbits.RD3 = 0;
-        PORTDbits.RD4 = 0;
-        i = 3;
-    }
+# 137 "Lab1.c"
     return;
 }

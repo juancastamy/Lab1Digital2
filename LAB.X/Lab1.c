@@ -32,9 +32,13 @@
 // Use project enums instead of #define for ON and OFF.
 
 #include <xc.h>
-
+// definimos variables para puertos
 #define _XTAL_FREQ 4000000
+
+#define estado_jugador1 RE2
+#define estado_jugador2 RE2
 //variables a utilizar
+char Estado = 0;
 char carrera1 = 1;
 char carrera2 = 1;
 char i = 3;
@@ -50,18 +54,54 @@ void main(void) {
     TRISDbits.TRISD4 = 0;
     //TRISEbits.TRISE0 = 1; //RE0 input
     //TRISEbits.TRISE1 = 1; //RE1 input
-    TRISEbits.TRISE3 = 1; //RE2 input
+    PORTEbits.RE3 = 1; //RE2 input
     //TRISA = 0; //PORTD output
     //TRISB = 0; //PORTB output
     ANSELH = 0;
     ANSEL = 0;
-    
-        /*for (int i=0; i<=3; i++){
-             PORTC = ~SEGMENTOS[i];
-             __delay_ms(5);
-        }*/
-    PORTC = SEGMENTOS[0];
-    if (PORTEbits.RE3 ==1){
+    PORTC = SEGMENTOS[0]; 
+    while(1){
+        if (PORTEbits.RE3 == 1){ 
+            Estado = 1;
+        }
+        if (PORTEbits.RE3 == 0 && Estado == 1){ 
+            PORTC = SEGMENTOS[i];
+            PORTDbits.RD2 = 1;
+            PORTDbits.RD3 = 0;
+            PORTDbits.RD4 = 0;
+            __delay_ms(5);
+            i = i-1;
+        
+            PORTC = SEGMENTOS[i];
+            PORTDbits.RD2 = 0;
+            PORTDbits.RD3 = 1;
+            PORTDbits.RD4 = 0;
+            __delay_ms(5);
+            i = i-1;
+            PORTC = SEGMENTOS[i];
+            PORTDbits.RD2 = 0;
+            PORTDbits.RD3 = 0;
+            PORTDbits.RD4 = 1;
+            __delay_ms(5);
+            i = i-1;
+            PORTC = SEGMENTOS[i];
+            PORTDbits.RD2 = 1;
+            PORTDbits.RD3 = 1;
+            PORTDbits.RD4 = 1;
+            Estado = 0;
+            __delay_ms(5);
+        }
+        else { 
+            PORTDbits.RD2 = 0;
+            PORTDbits.RD3 = 0;
+            PORTDbits.RD4 = 0;
+            i = 3;
+        } 
+    }
+    /*if (PORTEbits.RE3 == 1){ 
+        Estado = 1;
+    }
+    if (PORTEbits.RE3 == 0 && Estado == 1){ 
         PORTC = SEGMENTOS[i];
         PORTDbits.RD2 = 1;
         PORTDbits.RD3 = 0;
@@ -85,46 +125,14 @@ void main(void) {
         PORTDbits.RD2 = 1;
         PORTDbits.RD3 = 1;
         PORTDbits.RD4 = 1;
+        Estado = 0;
         __delay_ms(5);
     }
-    else {
+    else { 
         PORTDbits.RD2 = 0;
         PORTDbits.RD3 = 0;
         PORTDbits.RD4 = 0;
         i = 3;
-    } 
+    }*/ 
     return;
 }
-
-/*void setup (void){
-    OSCCON 0b110;
-    TRISC = 0;//PORTC output
-    TRISD = 0; //PORTD output
-    TRISEbits.TRISE0 = 1; //RE0 input
-    TRISEbits.TRISE1 = 1; //RE1 input
-    TRISEbits.TRISE2 = 1; //RE2 input
-    TRISA = 0; //PORTD output
-    TRISB = 0; //PORTB output
-    ANSELH = 0;
-    ANSEL = 0;
-}*/
-/*void display (void){
-    while(1){
-        for (int i=0; i<=3; i++){
-             PORTD = ~7SEGMENTOS[i];
-             __delay_ms(5);
-        }
-        if (PORTEbits.RE0 !=1){
-            PORTD = ~SEGMENTOS[i];
-            __delay_ms(5);
-            i = i-1;
-            PORTD = ~SEGMENTOS[i];
-            __delay_(5);
-            i = i-1;
-            PORTD = ~SEGMENTOS[i];
-            __delay_ms(5);
-            i = i-1;
-            PORTD = ~SEGMENTOS[i];
-        }
-    }
-}*/
