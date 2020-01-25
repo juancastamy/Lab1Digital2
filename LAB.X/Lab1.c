@@ -1,4 +1,5 @@
 /*
+ * First lab for Digital 2 course
  * File:   lab_1.c
  * Author: juan
  *
