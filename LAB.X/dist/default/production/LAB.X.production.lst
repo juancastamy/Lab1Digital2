@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.10 build 88905656 
-                                                                                               Fri Jan 24 20:22:44 2020
+                                                                                               Sat Jan 25 12:59:00 2020
 
 Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1 
      1                           	processor	16F887
@@ -324,7 +324,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
    310 ;;
    311 ;; *************** function _main *****************
    312 ;; Defined at:
-   313 ;;		line 43 in file "Lab1.c"
+   313 ;;		line 45 in file "Lab1.c"
    314 ;; Parameters:    Size  Location     Type
    315 ;;		None
    316 ;; Auto vars:     Size  Location     Type
@@ -358,51 +358,51 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
    344                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0]
    345                           
    346                           
-   347                           ;Lab1.c: 44:     OSCCON = 0b110;
+   347                           ;Lab1.c: 46:     OSCCON = 0b110;
    348  075D  3006               	movlw	6
    349  075E  1683               	bsf	3,5	;RP0=1, select bank1
    350  075F  1303               	bcf	3,6	;RP1=0, select bank1
    351  0760  008F               	movwf	15	;volatile
    352  0761                     l629:	
    353                           
-   354                           ;Lab1.c: 45:     TRISC = 0;
+   354                           ;Lab1.c: 47:     TRISC = 0;
    355  0761  0187               	clrf	7	;volatile
    356  0762                     l631:	
    357                           
-   358                           ;Lab1.c: 46:     TRISDbits.TRISD2 = 0;
+   358                           ;Lab1.c: 48:     TRISDbits.TRISD2 = 0;
    359  0762  1108               	bcf	8,2	;volatile
    360  0763                     l633:	
    361                           
-   362                           ;Lab1.c: 47:     TRISDbits.TRISD3 = 0;
+   362                           ;Lab1.c: 49:     TRISDbits.TRISD3 = 0;
    363  0763  1188               	bcf	8,3	;volatile
    364  0764                     l635:	
    365                           
-   366                           ;Lab1.c: 48:     TRISDbits.TRISD4 = 0;
+   366                           ;Lab1.c: 50:     TRISDbits.TRISD4 = 0;
    367  0764  1208               	bcf	8,4	;volatile
    368  0765                     l637:	
    369                           
-   370                           ;Lab1.c: 51:     TRISEbits.TRISE3 = 1;
+   370                           ;Lab1.c: 53:     TRISEbits.TRISE3 = 1;
    371  0765  1589               	bsf	9,3	;volatile
    372  0766                     l639:	
    373                           
-   374                           ;Lab1.c: 54:     ANSELH = 0;
+   374                           ;Lab1.c: 56:     ANSELH = 0;
    375  0766  1683               	bsf	3,5	;RP0=1, select bank3
    376  0767  1703               	bsf	3,6	;RP1=1, select bank3
    377  0768  0189               	clrf	9	;volatile
    378  0769                     l641:	
    379                           
-   380                           ;Lab1.c: 55:     ANSEL = 0;
+   380                           ;Lab1.c: 57:     ANSEL = 0;
    381  0769  0188               	clrf	8	;volatile
    382  076A                     l643:	
    383                           
-   384                           ;Lab1.c: 61:     PORTC = SEGMENTOS[0];
+   384                           ;Lab1.c: 63:     PORTC = SEGMENTOS[0];
    385  076A  0870               	movf	_SEGMENTOS,w
    386  076B  1283               	bcf	3,5	;RP0=0, select bank0
    387  076C  1303               	bcf	3,6	;RP1=0, select bank0
    388  076D  0087               	movwf	7	;volatile
    389  076E                     l645:	
    390                           
-   391                           ;Lab1.c: 62:     if (PORTEbits.RE3 ==1){
+   391                           ;Lab1.c: 64:     if (PORTEbits.RE3 ==1){
    392  076E  1D89               	btfss	9,3	;volatile
    393  076F  2F71               	goto	u11
    394  0770  2F72               	goto	u10
@@ -411,7 +411,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
    397  0772                     u10:	
    398  0772                     l647:	
    399                           
-   400                           ;Lab1.c: 63:         PORTC = SEGMENTOS[i];
+   400                           ;Lab1.c: 65:         PORTC = SEGMENTOS[i];
    401  0772  0874               	movf	_i,w
    402  0773  3E70               	addlw	(low (_SEGMENTOS| 0))& (0+255)
    403  0774  0084               	movwf	4
@@ -419,19 +419,19 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
    405  0776  0087               	movwf	7	;volatile
    406  0777                     l649:	
    407                           
-   408                           ;Lab1.c: 64:         PORTDbits.RD2 = 1;
+   408                           ;Lab1.c: 66:         PORTDbits.RD2 = 1;
    409  0777  1508               	bsf	8,2	;volatile
    410  0778                     l651:	
    411                           
-   412                           ;Lab1.c: 65:         PORTDbits.RD3 = 0;
+   412                           ;Lab1.c: 67:         PORTDbits.RD3 = 0;
    413  0778  1188               	bcf	8,3	;volatile
    414  0779                     l653:	
    415                           
-   416                           ;Lab1.c: 66:         PORTDbits.RD4 = 0;
+   416                           ;Lab1.c: 68:         PORTDbits.RD4 = 0;
    417  0779  1208               	bcf	8,4	;volatile
    418  077A                     l655:	
    419                           
-   420                           ;Lab1.c: 67:         _delay((unsigned long)((5)*(4000000/4000.0)));
+   420                           ;Lab1.c: 69:         _delay((unsigned long)((5)*(4000000/4000.0)));
    421  077A  3007               	movlw	7
    422  077B  00F8               	movwf	??_main+1
    423  077C  307D               	movlw	125
@@ -443,7 +443,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
    429  0781  2F7E               	goto	u27
    430  0782                     l657:	
    431                           
-   432                           ;Lab1.c: 68:         i = i-1;
+   432                           ;Lab1.c: 70:         i = i-1;
    433  0782  0874               	movf	_i,w
    434  0783  3EFF               	addlw	255
    435  0784  00F7               	movwf	??_main
@@ -451,7 +451,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
    437  0786  00F4               	movwf	_i
    438  0787                     l659:	
    439                           
-   440                           ;Lab1.c: 70:         PORTC = SEGMENTOS[i];
+   440                           ;Lab1.c: 72:         PORTC = SEGMENTOS[i];
    441  0787  0874               	movf	_i,w
    442  0788  3E70               	addlw	(low (_SEGMENTOS| 0))& (0+255)
    443  0789  0084               	movwf	4
@@ -461,19 +461,19 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
    447  078D  0087               	movwf	7	;volatile
    448  078E                     l661:	
    449                           
-   450                           ;Lab1.c: 71:         PORTDbits.RD2 = 0;
+   450                           ;Lab1.c: 73:         PORTDbits.RD2 = 0;
    451  078E  1108               	bcf	8,2	;volatile
    452  078F                     l663:	
    453                           
-   454                           ;Lab1.c: 72:         PORTDbits.RD3 = 1;
+   454                           ;Lab1.c: 74:         PORTDbits.RD3 = 1;
    455  078F  1588               	bsf	8,3	;volatile
    456  0790                     l665:	
    457                           
-   458                           ;Lab1.c: 73:         PORTDbits.RD4 = 0;
+   458                           ;Lab1.c: 75:         PORTDbits.RD4 = 0;
    459  0790  1208               	bcf	8,4	;volatile
    460  0791                     l667:	
    461                           
-   462                           ;Lab1.c: 74:         _delay((unsigned long)((5)*(4000000/4000.0)));
+   462                           ;Lab1.c: 76:         _delay((unsigned long)((5)*(4000000/4000.0)));
    463  0791  3007               	movlw	7
    464  0792  00F8               	movwf	??_main+1
    465  0793  307D               	movlw	125
@@ -484,7 +484,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
    470  0797  0BF8               	decfsz	??_main+1,f
    471  0798  2F95               	goto	u37
    472                           
-   473                           ;Lab1.c: 75:         i = i-1;
+   473                           ;Lab1.c: 77:         i = i-1;
    474  0799  0874               	movf	_i,w
    475  079A  3EFF               	addlw	255
    476  079B  00F7               	movwf	??_main
@@ -492,7 +492,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
    478  079D  00F4               	movwf	_i
    479  079E                     l669:	
    480                           
-   481                           ;Lab1.c: 76:         PORTC = SEGMENTOS[i];
+   481                           ;Lab1.c: 78:         PORTC = SEGMENTOS[i];
    482  079E  0874               	movf	_i,w
    483  079F  3E70               	addlw	(low (_SEGMENTOS| 0))& (0+255)
    484  07A0  0084               	movwf	4
@@ -502,19 +502,19 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
    488  07A4  0087               	movwf	7	;volatile
    489  07A5                     l671:	
    490                           
-   491                           ;Lab1.c: 77:         PORTDbits.RD2 = 0;
+   491                           ;Lab1.c: 79:         PORTDbits.RD2 = 0;
    492  07A5  1108               	bcf	8,2	;volatile
    493  07A6                     l673:	
    494                           
-   495                           ;Lab1.c: 78:         PORTDbits.RD3 = 0;
+   495                           ;Lab1.c: 80:         PORTDbits.RD3 = 0;
    496  07A6  1188               	bcf	8,3	;volatile
    497  07A7                     l675:	
    498                           
-   499                           ;Lab1.c: 79:         PORTDbits.RD4 = 1;
+   499                           ;Lab1.c: 81:         PORTDbits.RD4 = 1;
    500  07A7  1608               	bsf	8,4	;volatile
    501  07A8                     l677:	
    502                           
-   503                           ;Lab1.c: 80:         _delay((unsigned long)((5)*(4000000/4000.0)));
+   503                           ;Lab1.c: 82:         _delay((unsigned long)((5)*(4000000/4000.0)));
    504  07A8  3007               	movlw	7
    505  07A9  00F8               	movwf	??_main+1
    506  07AA  307D               	movlw	125
@@ -526,7 +526,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
    512  07AF  2FAC               	goto	u47
    513  07B0                     l679:	
    514                           
-   515                           ;Lab1.c: 81:         i = i-1;
+   515                           ;Lab1.c: 83:         i = i-1;
    516  07B0  0874               	movf	_i,w
    517  07B1  3EFF               	addlw	255
    518  07B2  00F7               	movwf	??_main
@@ -534,7 +534,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
    520  07B4  00F4               	movwf	_i
    521  07B5                     l681:	
    522                           
-   523                           ;Lab1.c: 82:         PORTC = SEGMENTOS[i];
+   523                           ;Lab1.c: 84:         PORTC = SEGMENTOS[i];
    524  07B5  0874               	movf	_i,w
    525  07B6  3E70               	addlw	(low (_SEGMENTOS| 0))& (0+255)
    526  07B7  0084               	movwf	4
@@ -544,18 +544,18 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
    530  07BB  0087               	movwf	7	;volatile
    531  07BC                     l683:	
    532                           
-   533                           ;Lab1.c: 83:         PORTDbits.RD2 = 1;
+   533                           ;Lab1.c: 85:         PORTDbits.RD2 = 1;
    534  07BC  1508               	bsf	8,2	;volatile
    535  07BD                     l685:	
    536                           
-   537                           ;Lab1.c: 84:         PORTDbits.RD3 = 1;
+   537                           ;Lab1.c: 86:         PORTDbits.RD3 = 1;
    538  07BD  1588               	bsf	8,3	;volatile
    539  07BE                     l687:	
    540                           
-   541                           ;Lab1.c: 85:         PORTDbits.RD4 = 1;
+   541                           ;Lab1.c: 87:         PORTDbits.RD4 = 1;
    542  07BE  1608               	bsf	8,4	;volatile
    543                           
-   544                           ;Lab1.c: 86:         _delay((unsigned long)((5)*(4000000/4000.0)));
+   544                           ;Lab1.c: 88:         _delay((unsigned long)((5)*(4000000/4000.0)));
    545  07BF  3007               	movlw	7
    546  07C0  00F8               	movwf	??_main+1
    547  07C1  307D               	movlw	125
@@ -566,23 +566,23 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
    552  07C5  0BF8               	decfsz	??_main+1,f
    553  07C6  2FC3               	goto	u57
    554                           
-   555                           ;Lab1.c: 87:     }
+   555                           ;Lab1.c: 89:     }
    556  07C7  2FCF               	goto	l35
    557  07C8                     l33:	
-   558                           ;Lab1.c: 88:     else {
+   558                           ;Lab1.c: 90:     else {
    559                           
    560                           
-   561                           ;Lab1.c: 89:         PORTDbits.RD2 = 0;
+   561                           ;Lab1.c: 91:         PORTDbits.RD2 = 0;
    562  07C8  1108               	bcf	8,2	;volatile
    563                           
-   564                           ;Lab1.c: 90:         PORTDbits.RD3 = 0;
+   564                           ;Lab1.c: 92:         PORTDbits.RD3 = 0;
    565  07C9  1188               	bcf	8,3	;volatile
    566                           
-   567                           ;Lab1.c: 91:         PORTDbits.RD4 = 0;
+   567                           ;Lab1.c: 93:         PORTDbits.RD4 = 0;
    568  07CA  1208               	bcf	8,4	;volatile
    569  07CB                     l689:	
    570                           
-   571                           ;Lab1.c: 92:         i = 3;
+   571                           ;Lab1.c: 94:         i = 3;
    572  07CB  3003               	movlw	3
    573  07CC  00F7               	movwf	??_main
    574  07CD  0877               	movf	??_main,w
@@ -678,7 +678,7 @@ EEDATA             100      0       0       0        0.0%
 
 
 Microchip Technology PIC Macro Assembler V2.10 build 88905656 
-Symbol Table                                                                                   Fri Jan 24 20:22:44 2020
+Symbol Table                                                                                   Sat Jan 25 12:59:00 2020
 
                        _i 0074                         pc 0002               __CFG_CP$OFF 0000  
                       l33 07C8                        l35 07CF                        u10 0772  

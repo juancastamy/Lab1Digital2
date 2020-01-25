@@ -11,7 +11,7 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"43 C:\Users\juan\Documents\GitHub\Lab1Digital2\LAB.X\Lab1.c
+"45 C:\Users\juan\Documents\GitHub\Lab1Digital2\LAB.X\Lab1.c
 [v _main main `(v  1 e 1 0 ]
 "290 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f887.h
 [v _PORTC PORTC `VEuc  1 e 1 @7 ]
@@ -63,12 +63,12 @@
 [v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
 "3449
 [v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
-"38 C:\Users\juan\Documents\GitHub\Lab1Digital2\LAB.X\Lab1.c
+"40 C:\Users\juan\Documents\GitHub\Lab1Digital2\LAB.X\Lab1.c
 [v _i i `uc  1 e 1 0 ]
-"40
+"42
 [v _SEGMENTOS SEGMENTOS `[4]uc  1 e 4 0 ]
-"43
+"45
 [v _main main `(v  1 e 1 0 ]
 {
-"95
+"97
 } 0
