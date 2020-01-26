@@ -2534,23 +2534,28 @@ void JUEGO ();
 void main(void) {
     OSCCON = 0b110;
     TRISC = 0;
+    TRISDbits.TRISD0 = 0;
     TRISDbits.TRISD2 = 0;
     TRISDbits.TRISD3 = 0;
     TRISDbits.TRISD4 = 0;
+    TRISDbits.TRISD7 = 0;
     TRISA = 0;
     TRISEbits.TRISE1 = 1;
     TRISEbits.TRISE2 = 1;
     TRISEbits.TRISE3 = 1;
-
+    TRISB = 0;
     ANSELH = 0;
     ANSEL = 0;
 
     while(1){
         PORTC = 0;
         PORTA = 0;
+        PORTB = 0;
+        PORTDbits.RD0 = 0;
         PORTDbits.RD2 = 0;
         PORTDbits.RD3 = 0;
         PORTDbits.RD4 = 0;
+        PORTDbits.RD7 = 0;
         if (PORTEbits.RE3 == 1){
             Estado = 1;
         }
@@ -2598,13 +2603,17 @@ void JUEGO (){
         }
         if (x==8){
             PORTA = 0;
+            PORTDbits.RD0 = 1;
+            EJ2=0;
         }
         if(x==9){
+            EJ2=0;
             x=0;
             i=3;
             PORTDbits.RD2 = 0;
             PORTDbits.RD3 = 0;
             PORTDbits.RD4 = 0;
+            PORTDbits.RD0 = 0;
             return;
         }
         if (PORTEbits.RE2 == 1){
@@ -2617,13 +2626,17 @@ void JUEGO (){
         }
         if (y==8){
             PORTB = 0;
+            PORTDbits.RD7 = 1;
+            EJ1=0;
         }
         if(y==9){
+            EJ1=0;
             y=0;
             i=3;
             PORTDbits.RD2 = 0;
             PORTDbits.RD3 = 0;
             PORTDbits.RD4 = 0;
+            PORTDbits.RD7 = 0;
             return;
     }
 }
