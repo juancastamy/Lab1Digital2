@@ -39,12 +39,16 @@
 #define estado_jugador2 RE2
 //variables a utilizar
 char Estado = 0;
-char carrera1 = 1;
-char carrera2 = 1;
+char EJ1 = 0;
+char EJ2 = 1;
 char i = 3;
+char x = 0;
+char y = 0;
 
 unsigned char SEGMENTOS[] = {0X3F,0x06,0x5B,0x4F};
-
+unsigned char jugador1[] = {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
+unsigned char jugador2[] = {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
+void JUEGO ();
 
 void main(void) {
     OSCCON = 0b110;
@@ -52,15 +56,20 @@ void main(void) {
     TRISDbits.TRISD2 = 0;//PORTD output
     TRISDbits.TRISD3 = 0;
     TRISDbits.TRISD4 = 0;
-    //TRISEbits.TRISE0 = 1; //RE0 input
-    //TRISEbits.TRISE1 = 1; //RE1 input
-    PORTEbits.RE3 = 1; //RE2 input
-    //TRISA = 0; //PORTD output
+    TRISA = 0; //PORTA output
+    TRISEbits.TRISE1 = 1; //RE1 input
+    TRISEbits.TRISE2 = 1; //RE2 input
+    TRISEbits.TRISE3 = 1; //RE3 input
     //TRISB = 0; //PORTB output
     ANSELH = 0;
     ANSEL = 0;
-    PORTC = SEGMENTOS[0]; 
+   
     while(1){
+        PORTC = 0;
+        PORTA = 0;
+        PORTDbits.RD2 = 0;
+        PORTDbits.RD3 = 0;
+        PORTDbits.RD4 = 0;
         if (PORTEbits.RE3 == 1){ 
             Estado = 1;
         }
@@ -71,7 +80,6 @@ void main(void) {
             PORTDbits.RD4 = 0;
             __delay_ms(5);
             i = i-1;
-        
             PORTC = SEGMENTOS[i];
             PORTDbits.RD2 = 0;
             PORTDbits.RD3 = 1;
@@ -89,50 +97,53 @@ void main(void) {
             PORTDbits.RD3 = 1;
             PORTDbits.RD4 = 1;
             Estado = 0;
-            __delay_ms(5);
+            __delay_ms(5); 
+            JUEGO();
         }
-        else { 
+    } 
+}
+    
+
+
+void JUEGO (){
+    while(1){
+        if (PORTEbits.RE1 == 1){
+                EJ1 = 1;
+            }
+        if (PORTEbits.RE1 == 0 && EJ1 == 1){
+            x=x+1;
+            PORTA = jugador1[x];
+            EJ1 = 0;
+        }
+        if (x==8){
+            PORTA = 0;
+        }
+        if(x==9){
+            x=0;
+            i=3;
             PORTDbits.RD2 = 0;
             PORTDbits.RD3 = 0;
             PORTDbits.RD4 = 0;
-            i = 3;
-        } 
-    }
-    /*if (PORTEbits.RE3 == 1){ 
-        Estado = 1;
-    }
-    if (PORTEbits.RE3 == 0 && Estado == 1){ 
-        PORTC = SEGMENTOS[i];
-        PORTDbits.RD2 = 1;
-        PORTDbits.RD3 = 0;
-        PORTDbits.RD4 = 0;
-        __delay_ms(5);
-        i = i-1;
-        
-        PORTC = SEGMENTOS[i];
-        PORTDbits.RD2 = 0;
-        PORTDbits.RD3 = 1;
-        PORTDbits.RD4 = 0;
-        __delay_ms(5);
-        i = i-1;
-        PORTC = SEGMENTOS[i];
-        PORTDbits.RD2 = 0;
-        PORTDbits.RD3 = 0;
-        PORTDbits.RD4 = 1;
-        __delay_ms(5);
-        i = i-1;
-        PORTC = SEGMENTOS[i];
-        PORTDbits.RD2 = 1;
-        PORTDbits.RD3 = 1;
-        PORTDbits.RD4 = 1;
-        Estado = 0;
-        __delay_ms(5);
-    }
-    else { 
-        PORTDbits.RD2 = 0;
-        PORTDbits.RD3 = 0;
-        PORTDbits.RD4 = 0;
-        i = 3;
-    }*/ 
-    return;
+            return; 
+        }    
+        if (PORTEbits.RE2 == 1){
+            EJ2 = 1;
+        }
+        if (PORTEbits.RE2 == 0 && EJ2 == 1){
+            y=y+1;
+            PORTB = jugador2[y];
+            EJ2 = 0;
+        }
+        if (y==8){
+            PORTB = 0;
+        }
+        if(y==9){
+            y=0;
+            i=3;
+            PORTDbits.RD2 = 0;
+            PORTDbits.RD3 = 0;
+            PORTDbits.RD4 = 0;
+            return; 
+    }    
+}
 }
