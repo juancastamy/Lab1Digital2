@@ -33,41 +33,39 @@
 
 #include <xc.h>
 // definimos variables para puertos
-#define _XTAL_FREQ 4000000
-
-#define estado_jugador1 RE2
-#define estado_jugador2 RE2
+#define _XTAL_FREQ 4000000//se define frecuencia de trabajo
 //variables a utilizar
-char Estado = 0;
-char EJ1 = 0;
-char EJ2 = 1;
-char i = 3;
-char x = 0;
-char y = 0;
+char Estado = 0;//variable para antirebote de start
+char EJ1 = 0;//variable para antirebote de jugador 1
+char EJ2 = 1;//variable para antirebote de jugador 2
+char i = 3;//variable para decidir el numero del display
+char x = 0;//variable que controla al jugador 1
+char y = 0;//variable que controla al jugador 2
 
-unsigned char SEGMENTOS[] = {0X3F,0x06,0x5B,0x4F};
-unsigned char jugador1[] = {0x00,0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
-unsigned char jugador2[] = {0x00,0x00,0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
-void JUEGO ();
+unsigned char SEGMENTOS[] = {0X3F,0x06,0x5B,0x4F};//display en hexadesimal
+unsigned char jugador1[] = {0x00,0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};//jugador 1 en hexadecimal
+unsigned char jugador2[] = {0x00,0x00,0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};//jugador 2 en hexadecimal
+void JUEGO ();//funcion juego 
 
 void main(void) {
-    OSCCON = 0b110;
+    OSCCON = 0b110;// se declara el osciloscopio 
     TRISC = 0;//PORTC output
-    TRISDbits.TRISD0 = 0;
-    TRISDbits.TRISD2 = 0;//PORTD output
-    TRISDbits.TRISD3 = 0;
-    TRISDbits.TRISD4 = 0;
-    TRISDbits.TRISD7 = 0;
-    TRISDbits.TRISD6 = 0;
-    TRISA = 0; //PORTA output
-    TRISEbits.TRISE1 = 1; //RE1 input
-    TRISEbits.TRISE2 = 1; //RE2 input
-    TRISEbits.TRISE3 = 1; //RE3 input
-    TRISB = 0; //PORTB output
-    ANSELH = 0;
-    ANSEL = 0;
+    TRISDbits.TRISD0 = 0;//PORTD7 output led jugador 1 gana
+    TRISDbits.TRISD2 = 0;//PORTD2 output led rojo semaforo 
+    TRISDbits.TRISD3 = 0;//PORTD3 output led amarillo semaforo
+    TRISDbits.TRISD4 = 0;//PORTD4 output led verde semaforo
+    TRISDbits.TRISD7 = 0;//PORTD7 output led jugador 2 gana
+    TRISDbits.TRISD6 = 0;//PORTD6 output buzzer de inicio
+    TRISA = 0; //PORTA output jugador 1
+    TRISEbits.TRISE1 = 1; //RE1 input primer jugador
+    TRISEbits.TRISE2 = 1; //RE2 input segundo jugador
+    TRISEbits.TRISE3 = 1; //RE3 input start del juego
+    TRISB = 0; //PORTB output jugador 2
+    ANSELH = 0;//entradas y salidas digitales
+    ANSEL = 0;//entradas y salidas digitales
    
     while(1){
+        //se define el estado unicial de cada salida 
         PORTC = 0;
         PORTA = 0;
         PORTB = 0;
@@ -77,34 +75,34 @@ void main(void) {
         PORTDbits.RD4 = 0;
         PORTDbits.RD7 = 0;
         PORTDbits.RD6 = 0;
-        if (PORTEbits.RE3 == 1){ 
+        //se inicia el antirebote del start
+        if (PORTEbits.RE3 == 1){
             Estado = 1;
         }
         if (PORTEbits.RE3 == 0 && Estado == 1){ 
-            PORTC = SEGMENTOS[i];
+            PORTC = SEGMENTOS[i];//se despliega el calor 3 y en el semaforo se enciende led roja
             y=y-1;
             PORTDbits.RD2 = 1;
             PORTDbits.RD3 = 0;
             PORTDbits.RD4 = 0;
             __delay_ms(5);
             i = i-1;
-            PORTC = SEGMENTOS[i];
+            PORTC = SEGMENTOS[i];//se despliega el calor 2 y en el semaforo se enciende led amarillo
             PORTDbits.RD2 = 0;
             PORTDbits.RD3 = 1;
             PORTDbits.RD4 = 0;
             __delay_ms(5);
             i = i-1;
-            PORTC = SEGMENTOS[i];
+            PORTC = SEGMENTOS[i];//se despliega el calor 1 y en el semaforo se enciende led verde
             PORTDbits.RD2 = 0;
             PORTDbits.RD3 = 0;
             PORTDbits.RD4 = 1;
             __delay_ms(5);
             i = i-1;
-            PORTC = SEGMENTOS[i];
-            PORTDbits.RD2 = 1;
+            PORTC = SEGMENTOS[i];//se despliega el calor 0 y en el semaforo se encienden todas las leds
             PORTDbits.RD3 = 1;
             PORTDbits.RD4 = 1;
-            Estado = 0;
+            Estado = 0;// se limpia la variable del antirebote
             PORTDbits.RD6 = 1;
             __delay_ms(5);
             PORTDbits.RD6 = 0;
@@ -113,7 +111,7 @@ void main(void) {
             PORTDbits.RD4 = 0;
             y=0;
             x=0;
-            JUEGO();
+            JUEGO(); //se llama la funcion juego
         }
     } 
 }
@@ -122,15 +120,15 @@ void main(void) {
 
 void JUEGO (){
     while(1){
-        if (PORTEbits.RE1 == 1){
+        if (PORTEbits.RE1 == 1){//programacion para primer jugador
                 EJ1 = 1;
             }
-        if (PORTEbits.RE1 == 0 && EJ1 == 1){
+        if (PORTEbits.RE1 == 0 && EJ1 == 1){//si se acepta la condicion se desplaza el jugador
             x=x+1;
             PORTA = jugador1[x];
             EJ1 = 0;
         }
-        if (x==8){
+        if (x==8){// al llegar a 8 pulzaciones se detiene al otro jugador y se enciende led de ganador
             __delay_ms(2);
             PORTB =0;
             PORTA = 0;
@@ -139,7 +137,7 @@ void JUEGO (){
             EJ2=0;
             y=0;
         }
-        if(x==9){
+        if(x==9){//apaga todo y se recetea el juego 
             EJ2=0;
             PORTB=0;
             PORTA=0;
@@ -152,16 +150,16 @@ void JUEGO (){
             PORTDbits.RD0 = 0;
             return; 
         }    
-        if (PORTEbits.RE2 == 1){
+        if (PORTEbits.RE2 == 1){//programacion para segundo jugador
             EJ2 = 1;
             
         }
-        if (PORTEbits.RE2 == 0 && EJ2 == 1){
+        if (PORTEbits.RE2 == 0 && EJ2 == 1){//si se acepta la condicion se desplaza el jugador
             y=y+1;
             PORTB = jugador2[y];
             EJ2 = 0;
         }
-        if (y==9){
+        if (y==9){// al llegar a 9 pulzaciones se detiene al otro jugador y se enciende led de ganador
             __delay_ms(2);
             PORTB = 0;
             PORTDbits.RD7 = 1;
@@ -170,7 +168,7 @@ void JUEGO (){
             x=0;
             PORTA = 0;
         }
-        if(y==10){
+        if(y==10){//apaga todo y se recetea el juego 
             PORTA = 0;
             PORTB = 0;
             EJ1=0;
