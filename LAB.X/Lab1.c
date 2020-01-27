@@ -133,7 +133,7 @@ void JUEGO (){
             PORTB =0;
             PORTA = 0;
             PORTDbits.RD0 = 1;
-            
+            PORTC = SEGMENTOS[1];
             EJ2=0;
             y=0;
         }
@@ -141,6 +141,7 @@ void JUEGO (){
             EJ2=0;
             PORTB=0;
             PORTA=0;
+            PORTC = 0;
             y=0;
             x=0;
             i=3;
@@ -163,7 +164,7 @@ void JUEGO (){
             __delay_ms(2);
             PORTB = 0;
             PORTDbits.RD7 = 1;
-            
+            PORTC = SEGMENTOS[2];
             EJ1=0;
             x=0;
             PORTA = 0;
@@ -171,6 +172,7 @@ void JUEGO (){
         if(y==10){//apaga todo y se recetea el juego 
             PORTA = 0;
             PORTB = 0;
+            PORTC = 0;
             EJ1=0;
             x=0;
             y=0;
