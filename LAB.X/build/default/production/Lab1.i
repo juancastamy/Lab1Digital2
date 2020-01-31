@@ -2516,19 +2516,16 @@ extern __bank0 __bit __timeout;
 
 
 
-
-
-
 char Estado = 0;
 char EJ1 = 0;
-char EJ2 = 1;
+char EJ2 = 0;
 char i = 3;
 char x = 0;
 char y = 0;
 
 unsigned char SEGMENTOS[] = {0X3F,0x06,0x5B,0x4F};
 unsigned char jugador1[] = {0x00,0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
-unsigned char jugador2[] = {0x00,0x00,0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
+unsigned char jugador2[] = {0x00,0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
 void JUEGO ();
 
 void main(void) {
@@ -2549,6 +2546,7 @@ void main(void) {
     ANSEL = 0;
 
     while(1){
+
         PORTC = 0;
         PORTA = 0;
         PORTB = 0;
@@ -2558,36 +2556,38 @@ void main(void) {
         PORTDbits.RD4 = 0;
         PORTDbits.RD7 = 0;
         PORTDbits.RD6 = 0;
+
         if (PORTEbits.RE3 == 1){
             Estado = 1;
         }
         if (PORTEbits.RE3 == 0 && Estado == 1){
-            PORTC = SEGMENTOS[i];
+            PORTC = ~SEGMENTOS[i];
             y=y-1;
             PORTDbits.RD2 = 1;
             PORTDbits.RD3 = 0;
             PORTDbits.RD4 = 0;
             _delay((unsigned long)((5)*(4000000/4000.0)));
             i = i-1;
-            PORTC = SEGMENTOS[i];
+            PORTC = ~SEGMENTOS[i];
             PORTDbits.RD2 = 0;
             PORTDbits.RD3 = 1;
             PORTDbits.RD4 = 0;
             _delay((unsigned long)((5)*(4000000/4000.0)));
             i = i-1;
-            PORTC = SEGMENTOS[i];
+            PORTC = ~SEGMENTOS[i];
             PORTDbits.RD2 = 0;
             PORTDbits.RD3 = 0;
             PORTDbits.RD4 = 1;
             _delay((unsigned long)((5)*(4000000/4000.0)));
             i = i-1;
-            PORTC = SEGMENTOS[i];
+            PORTC = ~SEGMENTOS[i];
             PORTDbits.RD2 = 1;
             PORTDbits.RD3 = 1;
             PORTDbits.RD4 = 1;
             Estado = 0;
             PORTDbits.RD6 = 1;
             _delay((unsigned long)((5)*(4000000/4000.0)));
+            PORTC = 0;
             PORTDbits.RD6 = 0;
             PORTDbits.RD2 = 0;
             PORTDbits.RD3 = 0;
@@ -2616,7 +2616,7 @@ void JUEGO (){
             PORTB =0;
             PORTA = 0;
             PORTDbits.RD0 = 1;
-
+            PORTC = ~SEGMENTOS[1];
             EJ2=0;
             y=0;
         }
@@ -2624,6 +2624,7 @@ void JUEGO (){
             EJ2=0;
             PORTB=0;
             PORTA=0;
+            PORTC = 0;
             y=0;
             x=0;
             i=3;
@@ -2642,18 +2643,19 @@ void JUEGO (){
             PORTB = jugador2[y];
             EJ2 = 0;
         }
-        if (y==9){
-            _delay((unsigned long)((2)*(4000000/4000.0)));
+        if (y==8){
+             _delay((unsigned long)((2)*(4000000/4000.0)));
             PORTB = 0;
             PORTDbits.RD7 = 1;
-
+            PORTC = ~SEGMENTOS[2];
             EJ1=0;
             x=0;
             PORTA = 0;
         }
-        if(y==10){
+        if(y==9){
             PORTA = 0;
             PORTB = 0;
+            PORTC = 0;
             EJ1=0;
             x=0;
             y=0;

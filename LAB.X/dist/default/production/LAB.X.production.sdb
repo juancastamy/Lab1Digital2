@@ -11,7 +11,7 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"53 C:\Users\juan\Documents\GitHub\Lab1Digital2\LAB.X\Lab1.c
+"50 C:\Users\juan\Documents\GitHub\Lab1Digital2\LAB.X\Lab1.c
 [v _main main `(v  1 e 1 0 ]
 "123
 [v _JUEGO JUEGO `(v  1 e 1 0 ]
@@ -73,25 +73,25 @@
 [v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
 "3449
 [v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
-"41 C:\Users\juan\Documents\GitHub\Lab1Digital2\LAB.X\Lab1.c
+"38 C:\Users\juan\Documents\GitHub\Lab1Digital2\LAB.X\Lab1.c
 [v _Estado Estado `uc  1 e 1 0 ]
-"42
+"39
 [v _EJ1 EJ1 `uc  1 e 1 0 ]
-"43
+"40
 [v _EJ2 EJ2 `uc  1 e 1 0 ]
-"44
+"41
 [v _i i `uc  1 e 1 0 ]
-"45
+"42
 [v _x x `uc  1 e 1 0 ]
-"46
+"43
 [v _y y `uc  1 e 1 0 ]
-"48
+"45
 [v _SEGMENTOS SEGMENTOS `[4]uc  1 e 4 0 ]
-"49
+"46
 [v _jugador1 jugador1 `[9]uc  1 e 9 0 ]
+"47
+[v _jugador2 jugador2 `[9]uc  1 e 9 0 ]
 "50
-[v _jugador2 jugador2 `[10]uc  1 e 10 0 ]
-"53
 [v _main main `(v  1 e 1 0 ]
 {
 "119
@@ -99,5 +99,5 @@
 "123
 [v _JUEGO JUEGO `(v  1 e 1 0 ]
 {
-"187
+"189
 } 0

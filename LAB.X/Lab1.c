@@ -37,14 +37,14 @@
 //variables a utilizar
 char Estado = 0;//variable para antirebote de start
 char EJ1 = 0;//variable para antirebote de jugador 1
-char EJ2 = 1;//variable para antirebote de jugador 2
+char EJ2 = 0;//variable para antirebote de jugador 2
 char i = 3;//variable para decidir el numero del display
 char x = 0;//variable que controla al jugador 1
 char y = 0;//variable que controla al jugador 2
 
 unsigned char SEGMENTOS[] = {0X3F,0x06,0x5B,0x4F};//display en hexadesimal
 unsigned char jugador1[] = {0x00,0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};//jugador 1 en hexadecimal
-unsigned char jugador2[] = {0x00,0x00,0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};//jugador 2 en hexadecimal
+unsigned char jugador2[] = {0x00,0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};//jugador 2 en hexadecimal
 void JUEGO ();//funcion juego 
 
 void main(void) {
@@ -80,31 +80,33 @@ void main(void) {
             Estado = 1;
         }
         if (PORTEbits.RE3 == 0 && Estado == 1){ 
-            PORTC = SEGMENTOS[i];//se despliega el calor 3 y en el semaforo se enciende led roja
+            PORTC = ~SEGMENTOS[i];//se despliega el calor 3 y en el semaforo se enciende led roja
             y=y-1;
             PORTDbits.RD2 = 1;
             PORTDbits.RD3 = 0;
             PORTDbits.RD4 = 0;
             __delay_ms(5);
             i = i-1;
-            PORTC = SEGMENTOS[i];//se despliega el calor 2 y en el semaforo se enciende led amarillo
+            PORTC = ~SEGMENTOS[i];//se despliega el calor 2 y en el semaforo se enciende led amarillo
             PORTDbits.RD2 = 0;
             PORTDbits.RD3 = 1;
             PORTDbits.RD4 = 0;
             __delay_ms(5);
             i = i-1;
-            PORTC = SEGMENTOS[i];//se despliega el calor 1 y en el semaforo se enciende led verde
+            PORTC = ~SEGMENTOS[i];//se despliega el calor 1 y en el semaforo se enciende led verde
             PORTDbits.RD2 = 0;
             PORTDbits.RD3 = 0;
             PORTDbits.RD4 = 1;
             __delay_ms(5);
             i = i-1;
-            PORTC = SEGMENTOS[i];//se despliega el calor 0 y en el semaforo se encienden todas las leds
+            PORTC = ~SEGMENTOS[i];//se despliega el calor 0 y en el semaforo se encienden todas las leds
+            PORTDbits.RD2 = 1;
             PORTDbits.RD3 = 1;
             PORTDbits.RD4 = 1;
             Estado = 0;// se limpia la variable del antirebote
             PORTDbits.RD6 = 1;
             __delay_ms(5);
+            PORTC = 0;
             PORTDbits.RD6 = 0;
             PORTDbits.RD2 = 0;
             PORTDbits.RD3 = 0;
@@ -133,7 +135,7 @@ void JUEGO (){
             PORTB =0;
             PORTA = 0;
             PORTDbits.RD0 = 1;
-            PORTC = SEGMENTOS[1];
+            PORTC = ~SEGMENTOS[1];
             EJ2=0;
             y=0;
         }
@@ -160,16 +162,16 @@ void JUEGO (){
             PORTB = jugador2[y];
             EJ2 = 0;
         }
-        if (y==9){// al llegar a 9 pulzaciones se detiene al otro jugador y se enciende led de ganador
-            __delay_ms(2);
+        if (y==8){// al llegar a 9 pulzaciones se detiene al otro jugador y se enciende led de ganador
+             __delay_ms(2);
             PORTB = 0;
             PORTDbits.RD7 = 1;
-            PORTC = SEGMENTOS[2];
+            PORTC = ~SEGMENTOS[2];
             EJ1=0;
             x=0;
             PORTA = 0;
         }
-        if(y==10){//apaga todo y se recetea el juego 
+        if(y==9){//apaga todo y se recetea el juego 
             PORTA = 0;
             PORTB = 0;
             PORTC = 0;
